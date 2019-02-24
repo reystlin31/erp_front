@@ -2,14 +2,16 @@
   "name": "erp_front",
   "version": "1.0.0",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.8.3",
-    "react-dom": "^16.8.3"
+    "react-dom": "^16.8.3",
+    "react-router-dom": "^4.3.1",
+    "universal-cookie": "^3.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
-    "axios": "^0.18.0",
     "babel-loader": "^8.0.5",
     "css-loader": "^2.1.0",
     "file-loader": "^3.0.1",
