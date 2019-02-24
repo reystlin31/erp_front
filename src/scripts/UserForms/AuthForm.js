@@ -26,16 +26,10 @@ export default class AuthForm extends Component
         {
             api('POST','Users','auth',{login:this.state.login, pass:this.state.pass})
                 .then(response=>{
-                    if(response.Token) {
-                        this.props.setUserToken(response.Token);
-                    }else{
-                        console.log(response.error);
-                        this.setState({error: response.error});
-                    }
-                })
+                    if(response.Token)
+                        this.props.setUserToken(response.Token);})
                 .catch(error=>{
-                    console.log(error);
-                });
+                this.setState({error: error});});
         }
     }
 

@@ -9,7 +9,7 @@ class UserModule extends Component{
         super(props);
 
         this.state={user:0};
-api('GET','Users','IDbyToken',{token:this.props.userToken})
+    api('GET','Users','IDbyToken',{token:this.props.userToken})
     .then(response=>{
         if(response.ID_User) {
             let id=response.ID_User;
