@@ -2,6 +2,11 @@ import React, {Component} from 'react'
 import {Link} from "react-router-dom";
 
 import api from './Api'
+import TitlePortal from './PortalForms/TitlePortal'
+import Modules from './Modules/Modules';
+import '../styles/App.css'
+
+
 
 class Portal extends Component{
 
@@ -14,17 +19,17 @@ class Portal extends Component{
         api('GET','Portals','isExists',{portal:this.portal})
             .then(response=>{
                 if(response.Result==='None') {
-                    console.log(response);
+                    //console.log(response);
                     this.setState({PortalAccess:0});
                 }else{
                     console.log(response);
                     api('GET','Portals','accessUserForPortal',{Portal:this.portal,ID_User:this.props.user.id})
                         .then(response=>{
                             if(response.Result==='None') {
-                                console.log(response);
+                                //console.log(response);
                                 this.setState({PortalAccess:1});
                             }else{
-                                console.log(response);
+                                //console.log(response);
                                 this.setState({PortalAccess:2});
                             }
                         })
@@ -42,7 +47,7 @@ class Portal extends Component{
         if(this.state.PortalAccess===0)
         {
             content=(<div className="Portal">
-                <div className="block">
+                <div className="block centerPage">
                     <h1>Выберите портал</h1>
                     <ul>
                         Портала {this.portal} не существует
@@ -56,7 +61,7 @@ class Portal extends Component{
         else if(this.state.PortalAccess===1)
         {
             content=(<div className="Portal">
-                <div className="block">
+                <div className="block centerPage">
                     <ul>
                         У вас нет доступа к порталу {this.portal}
                     </ul>
@@ -66,7 +71,8 @@ class Portal extends Component{
         else if(this.state.PortalAccess===2) {
             content=(
                 <div className="Portal">
-                    Portal {this.portal}111 {this.props.user.id}
+                    <TitlePortal portal={this.portal} user={this.props.user}/>
+                    <Modules portal={this.portal} user={this.props.user}/>
                 </div>
             );
         }

@@ -79,7 +79,7 @@ export default class App extends Component{
                     <div className="row">
                         <UserModule onLogout={this.onLogout} setUser={this.setUser} userToken={this.state.userToken}/>
                     </div>:''}
-                <Router>
+                <Router path='/' handler={App}>
                     {content}
                 </Router>
             </div>

@@ -9,26 +9,106 @@
     background-size: cover;
 }
 
-.modal {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-}
 .block
+{
+    display: block;
+    color: #fff;
+    background: linear-gradient(#2e3a6a,#2f0b45);
+    padding: 0px 20px 0px 20px;
+    -webkit-box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
+    box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
+    text-align:center;
+    border-radius:30px
+}
+
+.centerPage
 {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%,-50%);
-
-    background-color:#fff;
-    padding:60px;
-    -webkit-box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
-    box-shadow:0 3px 50px 0 rgba(0,0,0,.1);
-    text-align:center;
-    border-radius:10px
 }
+
+.block .header
+{
+    padding: 10px;
+    border-bottom: 1px solid #615f6c;
+    margin-bottom: 10px;
+}
+
+.block .body
+{
+    padding: 10px;
+}
+
+.block .footer
+{
+    padding: 10px;
+    border-top: 1px solid #615f6c;
+    margin-top: 10px;
+}  
+
+.Portal
+{
+    position: absolute;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;   
+}
+.btn {
+    border-radius: 100px;
+    border: medium none;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 20px 40px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.14);
+    text-transform: uppercase;
+    box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.2);
+    margin: 10px;
+   }
+   .btn-large{
+       width: 50%;
+       height: 50%;
+       margin: 5px;
+       padding: 10px 20px;
+   }
+.btn-primary {
+    background: #5a7ce2;
+   }
+.btn-secondary{
+    background: #797b7f;
+   }
+.btn-success{
+    background: #05ac50;
+   }
+.btn-danger{
+    background: #e81216;
+   }
+.btn-warning{
+    background: #e5ae09;
+   }
+.btn-info{
+    background: #01a8c1;
+   }
+.btn-light{
+    background: #f2f2f2;
+   }
+.btn-dark{
+    background: #343a40;
+   }
+.btn-outline-primary:hover {
+    background-color: #5a7ce2;
+    border-color: #5a7ce2;
+    color: #fff;
+   }
+.btn-outline-light:hover{
+    color: #3f345f;
+   }
+.btn-outline-warning:hover{
+    color: #ffffff;
+   }
 label
 {
     text-align:left;
