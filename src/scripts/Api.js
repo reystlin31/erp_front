@@ -13,6 +13,7 @@ export default function api(method, endpoint, func, params)
                 axios.get(api_address+endpoint+'/'+func,{params:params},
                     {useCredentails: true , mode:'cors',headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}})
                     .then(response=>{
+                        //console.log(response);
                         if(!response.data.error)
                             resolve(response.data); //Данные от API получены без ошибок
                         else

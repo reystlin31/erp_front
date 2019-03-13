@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {  BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { withRouter } from 'react-router-dom'
+//import {browserHistory, Router, Route, Switch} from 'react-router';
 import Cookies from 'universal-cookie';
 
 import '../styles/App.css'
@@ -13,7 +15,7 @@ import SelectPortal from './PortalForms/SelectPortal';
 import CreatePortal from './PortalForms/CreatePortal';
 import Portal from './Portal';
 
-export default class App extends Component{
+class App extends Component{
 
     constructor(props) {
         super(props);
@@ -56,21 +58,21 @@ export default class App extends Component{
         {//Пользователь не авторизован
 
             content=
-                <Switch> \
-                    <Route exact path="/" component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> \
-                    <Route path="/reg/:portal" component={RegForm}/> \
-                    <Route path="/reg" component={(props) =><RegForm {...props}/>}/> \
-                    <Route path="/passrec" component={(props) =><PasswordRecoveryForm {...props}/>}/> \
-                    <Route component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> \
+                <Switch> 
+                    <Route exact path="/" component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> 
+                    <Route path="/reg/:portal" component={RegForm}/> 
+                    <Route path="/reg" component={(props) =><RegForm {...props}/>}/> 
+                    <Route path="/passrec" component={(props) =><PasswordRecoveryForm {...props}/>}/> 
+                    <Route component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> 
                 </Switch>;
         }
         else
         {//Пользователь авторизован
             content=
-                <Switch> \
-                    <Route exact path="/" component={(props)=><SelectPortal user={this.state.user} {...props} />}/>/> \
-                    <Route path="/CreatePortal" component={(props) =><CreatePortal user={this.state.user} {...props}/>}/> \
-                    <Route path="/:portal" component={(props) =><Portal user={this.state.user} {...props}/>}/> \
+                <Switch> 
+                    <Route exact path="/" component={(props)=><SelectPortal user={this.state.user} {...props} />}/> 
+                    <Route path="/CreatePortal" component={(props) =><CreatePortal user={this.state.user} {...props}/>}/> 
+                    <Route path="/:portal" component={(props) =><Portal user={this.state.user} {...props}/>}/> 
                 </Switch>;
         }
         return (
@@ -79,10 +81,12 @@ export default class App extends Component{
                     <div className="row">
                         <UserModule onLogout={this.onLogout} setUser={this.setUser} userToken={this.state.userToken}/>
                     </div>:''}
-                <Router path='/' handler={App}>
+                <Router>
                     {content}
                 </Router>
             </div>
         );
     }
 }
+
+export default withRouter(App);

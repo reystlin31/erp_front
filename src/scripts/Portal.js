@@ -22,7 +22,8 @@ class Portal extends Component{
                     //console.log(response);
                     this.setState({PortalAccess:0});
                 }else{
-                    console.log(response);
+                    //console.log(response);
+                    if(this.props.user.id)
                     api('GET','Portals','accessUserForPortal',{Portal:this.portal,ID_User:this.props.user.id})
                         .then(response=>{
                             if(response.Result==='None') {

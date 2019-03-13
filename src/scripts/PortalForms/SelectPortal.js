@@ -12,14 +12,15 @@ export default class SelectPortal extends Component{
     }
 
     componentWillMount() {
-        api('GET','Portals','getPortalsById',{Id:this.props.user.id})
-            .then(response=>{
-                if(response.Result!=='None')
-                    this.setState({portals:response.Result});
-            })
-            .catch(error=>{
-                console.log(error);
-            });
+        if(this.props.user.id)
+            api('GET','Portals','getPortalsById',{Id:this.props.user.id})
+                .then(response=>{
+                    if(response.Result!=='None')
+                        this.setState({portals:response.Result});
+                })
+                .catch(error=>{
+                    console.log(error);
+                });
     }
 
     render() {

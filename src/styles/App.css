@@ -114,3 +114,10 @@ label
     text-align:left;
     width:90%;
 }
+
+.vertical-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+  }
+  
