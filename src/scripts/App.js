@@ -9,25 +9,26 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 
 import "../styles/App.css";
-import '../styles/bootstrap.css'
+import "../styles/bootstrap.css";
 
-import { Button } from 'react-bootstrap';
+import { Button } from "react-bootstrap";
 
-import AuthForm from './Modules/User/AuthForm'
+import AuthForm from "./Modules/User/AuthForm";
 import { Logout } from "./Actions/UserActions";
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
- 
-  render() {
 
+  render() {
     return (
       <div className="App container">
-          <AuthForm/>
-          {this.props.token}
-        <Button onClick={()=>this.props.Logout(this.props.token)}>logout</Button>
+        <AuthForm />
+        {this.props.token}
+        <Button onClick={() => this.props.Logout(this.props.token)}>
+          logout
+        </Button>
       </div>
     );
   }
@@ -37,11 +38,14 @@ class App extends Component {
 const mapStateToProps = store => {
   return {
     token: store.User.token
-  }
-}
-const mapDispatchToProps = (dispatch) => {
+  };
+};
+const mapDispatchToProps = dispatch => {
   return {
-      Logout: bindActionCreators(Logout, dispatch)
-  }
-}
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))
+    Logout: bindActionCreators(Logout, dispatch)
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(App));

@@ -32,7 +32,8 @@ export default function  User(state = initialState, action) {
       case types.AUTH_LOGOUT:
         return{
           ...state,
-          token: action.token
+          token: action.token,
+          error: action.error
         }
 
       default:
