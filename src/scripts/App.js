@@ -1,92 +1,47 @@
-import React, {Component} from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { withRouter } from 'react-router-dom'
-//import {browserHistory, Router, Route, Switch} from 'react-router';
-import Cookies from 'universal-cookie';
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import '../styles/App.css'
+import "../styles/App.css";
+import '../styles/bootstrap.css'
 
-import UserModule from './UserForms/UserModule';
-import AuthForm from './UserForms/AuthForm';
-import RegForm from './UserForms/RegForm';
-import PasswordRecoveryForm from './UserForms/PasswordRecoveryForm';
+import { Button } from 'react-bootstrap';
 
-import SelectPortal from './PortalForms/SelectPortal';
-import CreatePortal from './PortalForms/CreatePortal';
-import Portal from './Portal';
+import AuthForm from './Modules/User/AuthForm'
+import { Logout } from "./Actions/UserActions";
 
-class App extends Component{
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+ 
+  render() {
 
-    constructor(props) {
-        super(props);
-
-        const cookies = new Cookies();
-
-        this.state = {user: 0,userToken:''};
-
-        if(cookies.get('userToken'))
-            this.state.userToken = cookies.get('userToken');
-
-        this.setUserToken = this.setUserToken.bind(this);
-        this.onLogout = this.onLogout.bind(this);
-        this.setUser = this.setUser.bind(this);
-    }
-
-    setUserToken(token) {
-        const cookies = new Cookies();
-        cookies.set('userToken', token);
-        this.setState({userToken: token});
-    }
-
-    onLogout()
-    {
-        const cookies = new Cookies();
-        cookies.remove('userToken');
-        this.setState({user:0,userToken:0});
-    }
-
-    setUser(_user)
-    {
-        this.setState({user:_user});
-    }
-
-    render() {
-
-        let content = null;
-
-        if( !this.state.userToken)
-        {//Пользователь не авторизован
-
-            content=
-                <Switch> 
-                    <Route exact path="/" component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> 
-                    <Route path="/reg/:portal" component={RegForm}/> 
-                    <Route path="/reg" component={(props) =><RegForm {...props}/>}/> 
-                    <Route path="/passrec" component={(props) =><PasswordRecoveryForm {...props}/>}/> 
-                    <Route component={(props)=><AuthForm {...props} setUserToken={this.setUserToken}/>}/> 
-                </Switch>;
-        }
-        else
-        {//Пользователь авторизован
-            content=
-                <Switch> 
-                    <Route exact path="/" component={(props)=><SelectPortal user={this.state.user} {...props} />}/> 
-                    <Route path="/CreatePortal" component={(props) =><CreatePortal user={this.state.user} {...props}/>}/> 
-                    <Route path="/:portal" component={(props) =><Portal user={this.state.user} {...props}/>}/> 
-                </Switch>;
-        }
-        return (
-            <div className="App container">
-                {this.state.userToken?
-                    <div className="row">
-                        <UserModule onLogout={this.onLogout} setUser={this.setUser} userToken={this.state.userToken}/>
-                    </div>:''}
-                <Router>
-                    {content}
-                </Router>
-            </div>
-        );
-    }
+    return (
+      <div className="App container">
+          <AuthForm/>
+          {this.props.token}
+        <Button onClick={()=>this.props.Logout(this.props.token)}>logout</Button>
+      </div>
+    );
+  }
 }
 
-export default withRouter(App);
+// приклеиваем данные из store
+const mapStateToProps = store => {
+  return {
+    token: store.User.token
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+      Logout: bindActionCreators(Logout, dispatch)
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App))
