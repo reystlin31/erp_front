@@ -8,12 +8,13 @@ export const AUTH_REQUEST_FAILED = "AUTH_REQUEST_FAILED";
 export const AUTH_REQUEST_SUCCESS = "AUTH_REQUEST_SUCCESS";
 export const AUTH_LOGOUT = "AUTH_LOGOUT";
 
-export function Login(login, pass) {
+export function Login(login, pass, saved) {
   return (dispatch) =>{
     api("POST", "Users", "auth", { login: login, pass: pass })
       .then(response => {
         if (response.Token) {
-          cookie.set("token", response.Token);
+          if(saved)
+            cookie.set("token", response.Token);
           dispatch({
             type: AUTH_REQUEST_SUCCESS,
             token: response.Token

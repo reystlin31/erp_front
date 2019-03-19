@@ -76,7 +76,7 @@ class AuthForm extends Component {
                 type="submit"
                 onClick={e => {
                   e.preventDefault();
-                  this.props.Login(this.state.login, this.state.pass);
+                  this.props.Login(this.state.login, this.state.pass, this.state.saved);
                 }}
               >
                 Войти
