@@ -1,20 +1,20 @@
-import React, { Component } from "react"
+import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   withRouter
-} from "react-router-dom"
-import { connect } from "react-redux"
-import { bindActionCreators } from "redux"
+} from "react-router-dom";
 
-import "../styles/App.css"
-import "../styles/bootstrap.css"
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import AuthForm from "./Modules/User/AuthForm"
+import "../styles/App.css";
+import "../styles/bootstrap.css";
 
-import HeaderBlock from './HeaderBlock'
-import ContentBlock from './ContentBlock'
+import AuthForm from "./Modules/User/AuthForm";
+
+import HeaderBlock from "./HeaderBlock";
+import ContentBlock from "./ContentBlock";
 
 class App extends Component {
   constructor(props) {
@@ -24,26 +24,26 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
-        {!this.props.token?
-          (<AuthForm />):
-          (
-            <div>
-              <HeaderBlock/>
-              <ContentBlock/>
-            </div>
-          )}
-        
+        {!this.props.token ? (
+          <AuthForm />
+        ) : (
+          <div>
+            <HeaderBlock />
+            <Route path="/:portal" component={ContentBlock} />
+          </div>
+        )}
       </div>
     );
   }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = (store, ownProps) => {
   return {
-    token: store.User.token
+    token: store.User.token,
+    ownProps
   };
 };
 
-export default connect(
-  mapStateToProps
-)(withRouter(App));
+export default connect(mapStateToProps)(withRouter(App));
+
+
