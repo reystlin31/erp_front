@@ -29,7 +29,7 @@ class App extends Component {
         ) : (
           <div>
             <HeaderBlock />
-            <Route path="/:portal" component={ContentBlock} />
+            <ContentBlock />
           </div>
         )}
       </div>

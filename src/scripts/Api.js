@@ -1,10 +1,16 @@
 import axios from "axios";
+import {store}  from './store';
 
 //var api_address="https://bitrix.aria-invertor.ru/ERP/v1/";
-var api_address="https://erp-back.ru/";
+//var api_address="https://erp-back.ru/";
+var api_address="http://erp-back-yii.ru/web/";
 
 export default function api(method, endpoint, func, params)
 {
+    var token = store.getState().User.token;
+    if( token )
+        params = { token: token , ...params}
+
     switch(method)
     {
         case 'GET':
@@ -13,7 +19,7 @@ export default function api(method, endpoint, func, params)
                 axios.get(api_address+endpoint+'/'+func,{params:params},
                     {useCredentails: true , mode:'cors',headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}})
                     .then(response=>{
-                        console.log(response);
+                        //console.log(response);
                         if(!response.data.error)
                             resolve(response.data); //Данные от API получены без ошибок
                         else
@@ -32,7 +38,7 @@ export default function api(method, endpoint, func, params)
                 axios.post(api_address+endpoint+'/'+func,params,
                     {useCredentails: true , mode:'cors',headers: {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'}})
                     .then(response=>{
-                        console.log(response);
+                        //console.log(response);
                         if(!response.data.error)
                             resolve(response.data); //Данные от API получены без ошибок
                         else

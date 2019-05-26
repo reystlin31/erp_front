@@ -5,7 +5,7 @@ var cookie = new Cookies;
 
 const initialState = {
     token :  cookie.get('token'),
-    error : ''
+    user: ''
   }
 
 export default function  User(state = initialState, action) {
@@ -26,7 +26,8 @@ export default function  User(state = initialState, action) {
       case types.AUTH_REQUEST_SUCCESS:
         return {
           ...state,
-          token : action.token
+          ...action.user,
+          token : action.token,
         }
 
       case types.AUTH_LOGOUT:

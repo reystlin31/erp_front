@@ -1,28 +1,32 @@
 import React, { Component } from "react"
-
+import {
+    Route,
+    Switch,
+    withRouter
+  } from "react-router-dom";
 import { Container, Row, Col, Button } from "react-bootstrap"
-import { connect } from "react-redux";
+
+import MainModule from './Modules/MainModule'
+import FS from './Modules/FixService/FS'
 
 class ContentBlock extends Component{
     render()
     {
-        console.log(this.props);
         return(
             <Container style={{paddingTop:'65px'}}>
                 <Row>
                     <Col>
-                    1111, {this.props.portal}
+                    <Switch>
+                        <Route exact path='/' component={MainModule}/>
+                        <Route path='/FS' component={FS}/>
+                    </Switch>
                     </Col>
                 </Row>
             </Container>);
     }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-    portal: ownProps.match.params.portal
-  });
-
-export default connect(mapStateToProps)(ContentBlock);
+export default ContentBlock;
 
 
   
